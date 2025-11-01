@@ -229,3 +229,12 @@ else:
             if st.button("➡️ Carregar mais"):
                 st.session_state["cursor_agenda"] = next_cursor
                 st.rerun()
+
+with st.expander("🔧 Teste de conexão"):
+    if st.button("Testar agora"):
+        try:
+            row = q_one("select current_user, current_database(), inet_server_addr()::text as host, now() as ts")
+            st.success("Conectado!")
+            st.json(row)
+        except Exception as e:
+            st.error(f"Falhou: {e}")
