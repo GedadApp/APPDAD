@@ -1,0 +1,4 @@
+streamlit
+psycopg[binary]
+psycopg-pool
+pandas
