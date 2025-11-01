@@ -3,6 +3,36 @@ import pandas as pd
 from datetime import date, time
 from lib.db import q_all, q_one, q_exec
 
+# === Diagnóstico + criação de índices manual ===
+import streamlit as st
+from lib.db import q_exec, q_one
+
+def ensure_agenda_indexes():
+    q_exec("create index if not exists agenda_entidade_data_idx on agenda (entidade, data);")
+    q_exec("create unique index if not exists agenda_unq_ent_data_ind on agenda (entidade, data, indice);")
+    q_exec("create index if not exists agenda_status_idx on agenda (status);")
+
+with st.expander("🔧 Diagnóstico & manutenção", expanded=False):
+    st.caption("Ferramentas de teste e manutenção (use sob demanda).")
+    col_a, col_b = st.columns(2)
+    with col_a:
+        if st.button("Testar conexão agora"):
+            try:
+                row = q_one("select current_user, current_database(), inet_server_addr()::text as host, now() as ts")
+                st.success("Conectado com sucesso.")
+                st.json(row)
+            except Exception as e:
+                st.error(f"Falha de conexão: {e}")
+    with col_b:
+        if st.button("Criar/ajustar índices (executar 1x)"):
+            try:
+                ensure_agenda_indexes()
+                st.success("Índices criados/verificados.")
+            except Exception as e:
+                st.error(f"Erro ao criar índices: {e}")
+
+
+
 st.set_page_config(page_title="Agenda", page_icon="📅", layout="wide")
 
 # ===================== AJUSTES DE BANCO / ÍNDICES =====================
