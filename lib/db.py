@@ -14,14 +14,15 @@ def _dsn() -> str:
         raise RuntimeError("Configure DATABASE_URL em env var ou st.secrets") from e
 
 @st.cache_resource(show_spinner=False)
-def get_pool() -> ConnectionPool:
+def get_pool():
     return ConnectionPool(
         conninfo=_dsn(),
-        min_size=1,
-        max_size=12,
+        min_size=0,   # sem conexões ociosas
+        max_size=4,   # baixo para servidor serverless
         max_idle=60,
-        timeout=10,
+        timeout=20,   # tempo pra obter conexão do pool
     )
+
 
 def q_all(sql: str, params=None):
     with get_pool().connection() as conn:
