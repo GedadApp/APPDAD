@@ -17,7 +17,7 @@ def ensure_agenda_indexes():
         create index if not exists agenda_status_idx on agenda (status);
     """)
 
-ensure_agenda_indexes()
+#ensure_agenda_indexes()
 
 # ===================== HELPERS =====================
 @st.cache_data(ttl=300, show_spinner=False)
