@@ -2,7 +2,8 @@
 import streamlit as st
 import pandas as pd
 from datetime import date, time
-from lib.db import q_all, q_one, q_exec  # usa seu lib/db.py
+from lib.db import q_all, q_one, q_exec
+
 
 st.set_page_config(page_title="Agenda", page_icon="📅", layout="wide")
 st.title("📅 Agenda – 1 data, índices 1..12")
