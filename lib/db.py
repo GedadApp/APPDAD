@@ -3,7 +3,7 @@ import os
 import psycopg
 import psycopg.rows
 import streamlit as st
-
+import pip install
 def _dsn() -> str:
     # 1) Streamlit Secrets
     if "DATABASE_URL" in st.secrets:
