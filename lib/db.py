@@ -6,7 +6,7 @@ from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse
 import streamlit as st
 import psycopg
 import psycopg.rows
-
+import psycopg2
 # ---------- helpers de URL ----------
 def _raw_dsn() -> str:
     if "DATABASE_URL" in st.secrets:
