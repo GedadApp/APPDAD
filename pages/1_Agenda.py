@@ -1,9 +1,6 @@
 # ===================== PÁGINA: 1_Agenda.py (versão defensiva) =====================
 import streamlit as st
 import pandas as pd
- 
-
-
 from datetime import date, tim
 from lib.db import q_all, q_one, q_exec  # usa seu lib/db.py
 
